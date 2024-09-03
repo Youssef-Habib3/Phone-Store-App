@@ -1,9 +1,10 @@
 import { MdLocalGroceryStore } from "react-icons/md";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
-const Header = () => {
-  const { amount } = useSelector((state) => state.cart);
+const Header: React.FC = () => {
+  const amount = useSelector((state: RootState) => state.cart.amount);
 
   return (
     <motion.header
