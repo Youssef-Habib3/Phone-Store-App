@@ -44,10 +44,21 @@ const Main: React.FC = () => {
       <motion.h1
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2, delay: 2 }}
+        transition={{ duration: 2, delay: 1 }}
         className="text-4xl py-10 font-bold"
       >
         Loading...
+      </motion.h1>
+    );
+  } else if (carts.length === 0) {
+    return (
+      <motion.h1
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 2, delay: 1 }}
+        className="text-4xl py-10 font-bold"
+      >
+        NO ITEMS
       </motion.h1>
     );
   }
