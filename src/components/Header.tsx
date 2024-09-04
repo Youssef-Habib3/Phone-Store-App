@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 
 const Header: React.FC = () => {
-  const amount = useSelector((state: RootState) => state.cart.amount);
+  const { amount } = useSelector((state: RootState) => state.cart);
 
   return (
     <motion.header
@@ -14,11 +14,11 @@ const Header: React.FC = () => {
       className="bg-purple-700 w-full py-5 text-white"
     >
       <h1 className="font-bold text-4xl font-mono flex justify-center items-center gap-3 pointer-events-none select-none">
-        Your Bag{" "}
+        My Bag{" "}
         <div className="relative">
           <MdLocalGroceryStore />
           <span className="absolute -top-3 -right-3 text-sm bg-gray-200 rounded-full w-7 h-7 flex justify-center items-center text-black">
-            {amount || 0}
+            {amount}
           </span>
         </div>
       </h1>

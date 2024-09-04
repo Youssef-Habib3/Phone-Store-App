@@ -1,19 +1,10 @@
 import { useDispatch } from "react-redux";
 import { Button } from "./ui/button";
-import { clearCart } from "@/store/features/cartSlice";
-import { closeModal } from "@/store/features/cancelSlice";
+import { AppDispatch } from "@/store/store";
+import { clearCart, isClose } from "@/store/features/cartSlice";
 
-const RemoveItems = () => {
-  const dispatch = useDispatch();
-
-  const handleConfirm = () => {
-    dispatch(clearCart());
-    dispatch(closeModal());
-  };
-
-  const handleCancel = () => {
-    dispatch(closeModal());
-  };
+const RemoveItems: React.FC = () => {
+  const disPatch = useDispatch<AppDispatch>();
 
   return (
     <div className="w-[100vw] h-[100vh] absolute top-0 left-0 bg-black/90">
@@ -24,14 +15,17 @@ const RemoveItems = () => {
 
         <div className="flex justify-center items-center gap-8 mt-3">
           <Button
-            onClick={handleConfirm}
+            onClick={() => {
+              disPatch(clearCart());
+              disPatch(isClose());
+            }}
             className="border-blue-500 border-2 text-blue-500 hover:text-white hover:bg-blue-500 font-bold text-md w-28"
             variant="outline"
           >
             CONFIRM
           </Button>
           <Button
-            onClick={handleCancel}
+            onClick={() => disPatch(isClose())}
             className="border-red-500 border-2 text-red-500 hover:text-white hover:bg-red-500 font-bold text-md w-28"
             variant="outline"
           >

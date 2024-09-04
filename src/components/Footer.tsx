@@ -1,20 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import RemoveItems from "./RemoveItems";
-import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "@/store/features/cancelSlice";
 import { AppDispatch, RootState } from "@/store/store";
+import { motion } from "framer-motion";
+import { useDispatch, useSelector } from "react-redux";
+import RemoveItems from "./RemoveItems";
+import { isOpen } from "@/store/features/cartSlice";
 
 const Footer: React.FC = () => {
-  const { total } = useSelector((state: RootState) => state.cart);
-
-  const removeItem = useSelector((state: RootState) => state.cancel);
+  const { total, isOpened } = useSelector((state: RootState) => state.cart);
 
   const disPatch = useDispatch<AppDispatch>();
-
-  const handleClear = () => {
-    disPatch(openModal());
-  };
 
   return (
     <motion.footer
@@ -30,7 +24,7 @@ const Footer: React.FC = () => {
 
       <div className="flex justify-center items-center mt-4">
         <Button
-          onClick={handleClear}
+          onClick={() => disPatch(isOpen())}
           className="border-red-500 border-2 text-red-500 hover:text-white hover:bg-red-500 font-bold text-md"
           variant="outline"
         >
@@ -38,7 +32,7 @@ const Footer: React.FC = () => {
         </Button>
       </div>
 
-      {removeItem.isOpen && <RemoveItems />}
+      {isOpened && <RemoveItems />}
     </motion.footer>
   );
 };
